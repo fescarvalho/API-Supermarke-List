@@ -54,3 +54,7 @@ npm run dev
 - [POST]/list-items
 - [DELETE]/list-items/:id
 - [PUT]/list-items:/id
+
+### API running in the link
+
+- <https://api-supermarke-list-production.up.railway.app>
