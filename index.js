@@ -1,7 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
+app.use(express.json());
 const port = 3333;
+mongoose.set("strictQuery", true);
 
 async function connectDatabase() {
   await mongoose.connect("mongodb://localhost:27017");
@@ -21,6 +23,40 @@ app.get("/", (req, res) => {
 app.get("/list-items", async (req, res) => {
   const items = await listItem.find();
   return res.json(items);
+});
+app.delete("/list-items/:id", async (req, res) => {
+  const { id } = req.params;
+  const listItemDeletaded = await listItem.findByIdAndDelete(id);
+  return res.json(listItemDeletaded);
+});
+
+app.put("/list-items/:id", async (req, res) => {
+  const { id } = req.params;
+  const { name, quantity, checked } = req.body;
+
+  const listItemUpdated = await listItem.findByIdAndUpdate(
+    id,
+    {
+      name,
+      quantity,
+      checked,
+    },
+    {
+      new: true,
+    },
+  );
+  return res.json(listItemUpdated);
+});
+
+app.post("/list-items", async (req, res) => {
+  const { name, quantity, checked } = req.body;
+  const newItem = await listItem.create({
+    name,
+    quantity,
+    checked,
+  });
+
+  return res.json(newItem);
 });
 
 app.listen(port, () => {
