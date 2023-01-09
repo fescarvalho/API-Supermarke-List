@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const routes = require("./src/routes/index");
 
 const app = express();
+
 const port = Number(process.env.PORT) || 3333;
 console.log({ port, db: process.env.DATABASE_URL });
 
