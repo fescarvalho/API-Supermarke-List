@@ -12,7 +12,7 @@ So this API aims to organize this shopping list.
 - Mongoose
 - Nodemon
 
-### Requirements Ttchnologies
+### Requirements Technologies
 
 - Node.js installed (<https://nodejs.org>)
 - MongoDB instance running:
